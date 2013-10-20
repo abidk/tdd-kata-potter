@@ -1,6 +1,6 @@
 package tdd.kata.potter;
 
-public class BookStore {
+public class BookStoreCheckout {
 
   private int total = 0;
 

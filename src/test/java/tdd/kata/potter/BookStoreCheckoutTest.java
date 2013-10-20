@@ -5,13 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BookStoreTest {
+public class BookStoreCheckoutTest {
 
-  private BookStore store;
+  private BookStoreCheckout store;
 
   @Before
   public void setUp() {
-    store = new BookStore();
+    store = new BookStoreCheckout();
   }
 
   @Test
