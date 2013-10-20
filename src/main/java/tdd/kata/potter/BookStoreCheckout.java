@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class BookStoreCheckout {
 
-  private static final double DISCOUNT_RATE_TWO_BOOKS = 0.05;
-  private static final int BOOK_FULL_PRICE = 8;
+  private static final BigDecimal DISCOUNT_RATE_TWO_BOOKS = new BigDecimal("0.05");
+  private static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8");
 
   private Map<String, Integer> items = new HashMap<String, Integer>();
 
@@ -20,20 +20,29 @@ public class BookStoreCheckout {
   }
 
   public BigDecimal total() {
-    double total = 0;
+    BigDecimal total = BigDecimal.ZERO;
 
     for (Map.Entry<String, Integer> item : items.entrySet()) {
-      total += item.getValue() * BOOK_FULL_PRICE;
+      BigDecimal sameSetPrice = calculateBookSetPrice(item.getValue());
+
+      total = total.add(sameSetPrice);
     }
 
     total = applyDiscount(total);
 
-    return new BigDecimal(total);
+    return total;
   }
 
-  private double applyDiscount(double total) {
+  private BigDecimal calculateBookSetPrice(int noOfSameBooks) {
+    BigDecimal setPrice = new BigDecimal(noOfSameBooks);
+    return setPrice.multiply(BOOK_FULL_PRICE);
+  }
+
+  private BigDecimal applyDiscount(BigDecimal total) {
     if (items.size() == 2) {
-      total = total - (total * DISCOUNT_RATE_TWO_BOOKS);
+      BigDecimal discount = total.multiply(DISCOUNT_RATE_TWO_BOOKS);
+
+      total = total.subtract(discount);
     }
     return total;
   }

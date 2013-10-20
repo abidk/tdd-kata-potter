@@ -25,7 +25,7 @@ public class BookStoreCheckoutTest {
   public void buyingOneBookMustReturnPriceOf8Euro() {
     store.buy("1");
 
-    assertEquals(new BigDecimal(8), store.total());
+    assertEquals(new BigDecimal("8"), store.total());
   }
 
   @Test
@@ -33,7 +33,7 @@ public class BookStoreCheckoutTest {
     store.buy("1");
     store.buy("2");
 
-    assertEquals(new BigDecimal(15.20), store.total());
+    assertEquals(new BigDecimal("15.20"), store.total());
   }
 
   @Test
@@ -41,6 +41,6 @@ public class BookStoreCheckoutTest {
     store.buy("1");
     store.buy("1");
 
-    assertEquals(new BigDecimal(16), store.total());
+    assertEquals(new BigDecimal("16"), store.total());
   }
 }
