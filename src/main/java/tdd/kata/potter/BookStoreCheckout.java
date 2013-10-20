@@ -23,20 +23,19 @@ public class BookStoreCheckout {
   public BigDecimal total() {
     BigDecimal total = BigDecimal.ZERO;
 
-    for (Map.Entry<String, Integer> item : items.entrySet()) {
-      BigDecimal sameSetPrice = calculateBookSetPrice(item.getValue());
-
-      total = total.add(sameSetPrice);
-    }
-
+    total = calculateFullPrice(total);
     total = applyDiscount(total);
 
     return total;
   }
 
-  private BigDecimal calculateBookSetPrice(int noOfSameBooks) {
-    BigDecimal setPrice = new BigDecimal(noOfSameBooks);
-    return setPrice.multiply(BOOK_FULL_PRICE);
+  private BigDecimal calculateFullPrice(BigDecimal total) {
+    for (Map.Entry<String, Integer> item : items.entrySet()) {
+      BigDecimal sameBookFullPrice = new BigDecimal(item.getValue());
+
+      total = total.add(sameBookFullPrice.multiply(BOOK_FULL_PRICE));
+    }
+    return total;
   }
 
   private BigDecimal applyDiscount(BigDecimal total) {
