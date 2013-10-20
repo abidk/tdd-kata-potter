@@ -23,15 +23,12 @@ public class BookStoreCheckout {
   }
 
   public BigDecimal total() {
-    BigDecimal total = BigDecimal.ZERO;
-
-    total = calculateFullPrice(total);
-    total = applyDiscount(total);
-
-    return total;
+    BigDecimal total = calculateFullPrice();
+    return total.subtract(calculateDiscountPrice());
   }
 
-  private BigDecimal calculateFullPrice(BigDecimal total) {
+  private BigDecimal calculateFullPrice() {
+    BigDecimal total = BigDecimal.ZERO;
     for (Map.Entry<String, Integer> item : items.entrySet()) {
       BigDecimal sameBookFullPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(item.getValue()));
 
@@ -40,11 +37,11 @@ public class BookStoreCheckout {
     return total;
   }
 
-  private BigDecimal applyDiscount(BigDecimal total) {
+  private BigDecimal calculateDiscountPrice() {
     BigDecimal discountRate = getDiscountRate(items.size());
-    BigDecimal discount = total.multiply(discountRate);
+    BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(items.size()));
 
-    return total.subtract(discount);
+    return discountPrice.multiply(discountRate);
   }
 
   private BigDecimal getDiscountRate(int noOfDifferentBooks) {
