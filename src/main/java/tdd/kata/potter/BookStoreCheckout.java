@@ -1,17 +1,15 @@
 package tdd.kata.potter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BookStoreCheckout {
 
-  private static final BigDecimal DISCOUNT_RATE_TWO_BOOKS = new BigDecimal("0.05");
-  private static final BigDecimal DISCOUNT_RATE_THREE_BOOKS = new BigDecimal("0.10");
-  private static final BigDecimal DISCOUNT_RATE_FOUR_BOOKS = new BigDecimal("0.20");
-  private static final BigDecimal DISCOUNT_RATE_FIVE_BOOKS = new BigDecimal("0.25");
-  private static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8.00");
+  public static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8.00");
 
+  private DiscountCalculator discountCalculator = new DiscountCalculatorImpl();
   private Map<String, Integer> items = new HashMap<String, Integer>();
 
   public void buy(String isbn) {
@@ -24,7 +22,7 @@ public class BookStoreCheckout {
 
   public BigDecimal total() {
     BigDecimal fullPrice = calculateFullPrice();
-    BigDecimal discountPrice = calculateDiscountPrice();
+    BigDecimal discountPrice = discountCalculator.calculateDiscount(new ArrayList<Integer>(items.values()));
 
     return fullPrice.subtract(discountPrice);
   }
@@ -40,36 +38,6 @@ public class BookStoreCheckout {
       bookCount += item.getValue();
     }
     return bookCount;
-  }
-
-  private BigDecimal calculateDiscountPrice() {
-    int noOfDifferentBooks = items.size();
-    int totalBookCount = totalBookCount();
-
-    if (noOfDifferentBooks == 5 && totalBookCount == 8) {
-      BigDecimal discountRate = getDiscountRate(4);
-      BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(4));
-      return discountPrice.multiply(discountRate).multiply(new BigDecimal(2));
-    } else {
-      BigDecimal discountRate = getDiscountRate(noOfDifferentBooks);
-      BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(noOfDifferentBooks));
-      return discountPrice.multiply(discountRate);
-    }
-  }
-
-  private BigDecimal getDiscountRate(int noOfDifferentBooks) {
-    switch (noOfDifferentBooks) {
-    case 2:
-      return DISCOUNT_RATE_TWO_BOOKS;
-    case 3:
-      return DISCOUNT_RATE_THREE_BOOKS;
-    case 4:
-      return DISCOUNT_RATE_FOUR_BOOKS;
-    case 5:
-      return DISCOUNT_RATE_FIVE_BOOKS;
-    default:
-      return BigDecimal.ZERO;
-    }
   }
 
 }
