@@ -29,7 +29,7 @@ public class BookStoreCheckoutTest {
   }
 
   @Test
-  public void buyingTwoDifferentBooksMustApply5PercentDiscountReturnPriceOf15_20Euro() {
+  public void buyingTwoDifferentBooksMustApply5PercentDiscountAndReturnPriceOf15_20Euro() {
     store.buy("1");
     store.buy("2");
 
@@ -42,5 +42,14 @@ public class BookStoreCheckoutTest {
     store.buy("1");
 
     assertEquals(new BigDecimal("16"), store.total());
+  }
+  
+  @Test
+  public void buyingThreeDifferentBooksMustApply10PercentDiscountAndReturnPriceOf21_60Euro() {
+    store.buy("1");
+    store.buy("2");
+    store.buy("3");
+
+    assertEquals(new BigDecimal("21.60"), store.total());
   }
 }
