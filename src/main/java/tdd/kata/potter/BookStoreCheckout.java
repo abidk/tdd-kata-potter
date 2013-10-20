@@ -2,13 +2,17 @@ package tdd.kata.potter;
 
 public class BookStoreCheckout {
 
-  private int total = 0;
+  private int items = 0;
 
   public void buy() {
-    total += 8;
+    items += 1;
   }
 
-  public int total() {
+  public double total() {
+    double total = items * 8;
+    if (items == 2) {
+      total = total - (total * 0.05);
+    }
     return total;
   }
 

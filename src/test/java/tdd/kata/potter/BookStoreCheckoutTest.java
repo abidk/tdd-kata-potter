@@ -16,14 +16,14 @@ public class BookStoreCheckoutTest {
 
   @Test
   public void buyingZeroBooksMustReturnPriceOf0Euro() {
-    assertEquals(0, store.total());
+    assertEquals(0, store.total(), 0.1);
   }
 
   @Test
   public void buyingOneBookMustReturnPriceOf8Euro() {
     store.buy();
 
-    assertEquals(8, store.total());
+    assertEquals(8, store.total(), 0.1);
   }
 
   @Test
