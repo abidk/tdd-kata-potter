@@ -41,12 +41,8 @@ public class BookStoreCheckout {
   }
 
   private BigDecimal applyDiscount(BigDecimal total) {
-    BigDecimal discount = BigDecimal.ZERO;
-
     BigDecimal discountRate = getDiscountRate(items.size());
-    if (discountRate != null) {
-      discount = total.multiply(discountRate);
-    }
+    BigDecimal discount = total.multiply(discountRate);
 
     return total.subtract(discount);
   }
@@ -62,7 +58,7 @@ public class BookStoreCheckout {
     case 5:
       return DISCOUNT_RATE_FIVE_BOOKS;
     default:
-      return null;
+      return BigDecimal.ZERO;
     }
   }
 
