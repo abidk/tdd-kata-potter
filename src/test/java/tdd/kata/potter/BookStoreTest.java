@@ -12,4 +12,11 @@ public class BookStoreTest {
 
     assertEquals(0, store.buy());
   }
+
+  @Test
+  public void buyingOneBookMustReturnPriceOf8() {
+    BookStore store = new BookStore();
+
+    assertEquals(8, store.buy());
+  }
 }
