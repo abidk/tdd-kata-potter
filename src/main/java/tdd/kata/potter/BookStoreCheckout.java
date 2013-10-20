@@ -40,20 +40,27 @@ public class BookStoreCheckout {
   }
 
   private BigDecimal applyDiscount(BigDecimal total) {
-    if (items.size() == 2) {
-      BigDecimal discount = total.multiply(DISCOUNT_RATE_TWO_BOOKS);
+    BigDecimal discount = BigDecimal.ZERO;
 
-      total = total.subtract(discount);
-    } else if (items.size() == 3) {
-      BigDecimal discount = total.multiply(DISCOUNT_RATE_THREE_BOOKS);
-
-      total = total.subtract(discount);
-    } else if (items.size() == 4) {
-      BigDecimal discount = total.multiply(DISCOUNT_RATE_FOUR_BOOKS);
-
-      total = total.subtract(discount);
+    BigDecimal discountRate = getDiscountRate(items.size());
+    if (discountRate != null) {
+      discount = total.multiply(discountRate);
     }
-    return total;
+
+    return total.subtract(discount);
+  }
+
+  private BigDecimal getDiscountRate(int noOfUniqueItems) {
+    switch (noOfUniqueItems) {
+    case 2:
+      return DISCOUNT_RATE_TWO_BOOKS;
+    case 3:
+      return DISCOUNT_RATE_THREE_BOOKS;
+    case 4:
+      return DISCOUNT_RATE_FOUR_BOOKS;
+    default:
+      return null;
+    }
   }
 
 }
