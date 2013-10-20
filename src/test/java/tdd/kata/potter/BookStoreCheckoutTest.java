@@ -23,23 +23,23 @@ public class BookStoreCheckoutTest {
 
   @Test
   public void buyingOneBookMustReturnPriceOf8Euro() {
-    store.buy();
+    store.buy("1");
 
     assertEquals(new BigDecimal(8), store.total());
   }
 
   @Test
   public void buyingTwoDifferentBooksMustApply5PercentDiscountReturnPriceOf15_20Euro() {
-    store.buy();
-    store.buy();
+    store.buy("1");
+    store.buy("2");
 
     assertEquals(new BigDecimal(15.20), store.total());
   }
-  
+
   @Test
   public void buyingTwoSameBooksMustReturnPriceOf16Euro() {
-    store.buy();
-    store.buy();
+    store.buy("1");
+    store.buy("1");
 
     assertEquals(new BigDecimal(16), store.total());
   }
