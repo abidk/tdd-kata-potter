@@ -25,4 +25,12 @@ public class BookStoreCheckoutTest {
 
     assertEquals(8, store.total());
   }
+
+  @Test
+  public void buyingTwoDifferentBooksMustApply5PercentDiscountReturnPriceOf15_20Euro() {
+    store.buy();
+    store.buy();
+
+    assertEquals(15.20, store.total(), 0.1);
+  }
 }
