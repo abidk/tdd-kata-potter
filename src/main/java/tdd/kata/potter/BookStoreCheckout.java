@@ -30,14 +30,12 @@ public class BookStoreCheckout {
   }
 
   private BigDecimal calculateFullPrice() {
-    BigDecimal total = BigDecimal.ZERO;
+    int bookCount = 0;
     for (Map.Entry<String, Integer> item : items.entrySet()) {
-      BigDecimal noOfSameBooks = new BigDecimal(item.getValue());
-      BigDecimal sameBookFullPrice = BOOK_FULL_PRICE.multiply(noOfSameBooks);
-
-      total = total.add(sameBookFullPrice);
+      bookCount += item.getValue();
     }
-    return total;
+
+    return BOOK_FULL_PRICE.multiply(new BigDecimal(bookCount));
   }
 
   private BigDecimal calculateDiscountPrice() {

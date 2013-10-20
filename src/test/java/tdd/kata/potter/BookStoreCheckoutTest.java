@@ -83,4 +83,5 @@ public class BookStoreCheckoutTest {
 
     assertEquals(new BigDecimal("29.6000"), store.total());
   }
+
 }
