@@ -23,14 +23,17 @@ public class BookStoreCheckout {
   }
 
   public BigDecimal total() {
-    BigDecimal total = calculateFullPrice();
-    return total.subtract(calculateDiscountPrice());
+    BigDecimal fullPrice = calculateFullPrice();
+    BigDecimal discountPrice = calculateDiscountPrice();
+
+    return fullPrice.subtract(discountPrice);
   }
 
   private BigDecimal calculateFullPrice() {
     BigDecimal total = BigDecimal.ZERO;
     for (Map.Entry<String, Integer> item : items.entrySet()) {
-      BigDecimal sameBookFullPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(item.getValue()));
+      BigDecimal noOfSameBooks = new BigDecimal(item.getValue());
+      BigDecimal sameBookFullPrice = BOOK_FULL_PRICE.multiply(noOfSameBooks);
 
       total = total.add(sameBookFullPrice);
     }
