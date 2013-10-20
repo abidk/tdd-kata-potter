@@ -39,8 +39,9 @@ public class BookStoreCheckout {
   }
 
   private BigDecimal calculateDiscountPrice() {
-    BigDecimal discountRate = getDiscountRate(items.size());
-    BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(items.size()));
+    int eligbleBookCount = items.size();
+    BigDecimal discountRate = getDiscountRate(eligbleBookCount);
+    BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(eligbleBookCount));
 
     return discountPrice.multiply(discountRate);
   }
