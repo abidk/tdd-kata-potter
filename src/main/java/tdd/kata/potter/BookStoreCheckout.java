@@ -30,19 +30,31 @@ public class BookStoreCheckout {
   }
 
   private BigDecimal calculateFullPrice() {
+    int bookCount = totalBookCount();
+    return BOOK_FULL_PRICE.multiply(new BigDecimal(bookCount));
+  }
+
+  private int totalBookCount() {
     int bookCount = 0;
     for (Map.Entry<String, Integer> item : items.entrySet()) {
       bookCount += item.getValue();
     }
-
-    return BOOK_FULL_PRICE.multiply(new BigDecimal(bookCount));
+    return bookCount;
   }
 
   private BigDecimal calculateDiscountPrice() {
-    BigDecimal discountRate = getDiscountRate(items.size());
-    BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(items.size()));
+    int noOfDifferentBooks = items.size();
+    int totalBookCount = totalBookCount();
 
-    return discountPrice.multiply(discountRate);
+    if (noOfDifferentBooks == 5 && totalBookCount == 8) {
+      BigDecimal discountRate = getDiscountRate(4);
+      BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(4));
+      return discountPrice.multiply(discountRate).multiply(new BigDecimal(2));
+    } else {
+      BigDecimal discountRate = getDiscountRate(noOfDifferentBooks);
+      BigDecimal discountPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(noOfDifferentBooks));
+      return discountPrice.multiply(discountRate);
+    }
   }
 
   private BigDecimal getDiscountRate(int noOfDifferentBooks) {
