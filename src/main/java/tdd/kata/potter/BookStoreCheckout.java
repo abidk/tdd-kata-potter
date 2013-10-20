@@ -9,6 +9,7 @@ public class BookStoreCheckout {
   private static final BigDecimal DISCOUNT_RATE_TWO_BOOKS = new BigDecimal("0.05");
   private static final BigDecimal DISCOUNT_RATE_THREE_BOOKS = new BigDecimal("0.10");
   private static final BigDecimal DISCOUNT_RATE_FOUR_BOOKS = new BigDecimal("0.20");
+  private static final BigDecimal DISCOUNT_RATE_FIVE_BOOKS = new BigDecimal("0.25");
   private static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8");
 
   private Map<String, Integer> items = new HashMap<String, Integer>();
@@ -58,6 +59,8 @@ public class BookStoreCheckout {
       return DISCOUNT_RATE_THREE_BOOKS;
     case 4:
       return DISCOUNT_RATE_FOUR_BOOKS;
+    case 5:
+      return DISCOUNT_RATE_FIVE_BOOKS;
     default:
       return null;
     }

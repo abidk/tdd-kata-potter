@@ -71,6 +71,6 @@ public class BookStoreCheckoutTest {
     store.buy("4");
     store.buy("5");
 
-    assertEquals(new BigDecimal("30"), store.total());
+    assertEquals(new BigDecimal("30.00"), store.total());
   }
 }
