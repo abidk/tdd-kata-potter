@@ -2,12 +2,14 @@ package tdd.kata.potter;
 
 public class BookStore {
 
-  public int buy(String isbn) {
-    if (isbn != null) {
-      return 8;
-    }
+  private int total = 0;
 
-    return 0;
+  public void buy() {
+    total += 8;
+  }
+
+  public int total() {
+    return total;
   }
 
 }

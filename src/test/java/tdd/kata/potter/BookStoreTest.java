@@ -2,21 +2,27 @@ package tdd.kata.potter;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class BookStoreTest {
 
-  @Test
-  public void buyingZeroBooksMustReturnPriceOf0() {
-    BookStore store = new BookStore();
+  private BookStore store;
 
-    assertEquals(0, store.buy(null));
+  @Before
+  public void setUp() {
+    store = new BookStore();
   }
 
   @Test
-  public void buyingOneBookMustReturnPriceOf8() {
-    BookStore store = new BookStore();
+  public void buyingZeroBooksMustReturnPriceOf0Euro() {
+    assertEquals(0, store.total());
+  }
 
-    assertEquals(8, store.buy("1"));
+  @Test
+  public void buyingOneBookMustReturnPriceOf8Euro() {
+    store.buy();
+
+    assertEquals(8, store.total());
   }
 }
