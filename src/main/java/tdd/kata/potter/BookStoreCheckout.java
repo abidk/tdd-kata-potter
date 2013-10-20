@@ -10,7 +10,7 @@ public class BookStoreCheckout {
   private static final BigDecimal DISCOUNT_RATE_THREE_BOOKS = new BigDecimal("0.10");
   private static final BigDecimal DISCOUNT_RATE_FOUR_BOOKS = new BigDecimal("0.20");
   private static final BigDecimal DISCOUNT_RATE_FIVE_BOOKS = new BigDecimal("0.25");
-  private static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8");
+  private static final BigDecimal BOOK_FULL_PRICE = new BigDecimal("8.00");
 
   private Map<String, Integer> items = new HashMap<String, Integer>();
 
@@ -33,9 +33,9 @@ public class BookStoreCheckout {
 
   private BigDecimal calculateFullPrice(BigDecimal total) {
     for (Map.Entry<String, Integer> item : items.entrySet()) {
-      BigDecimal sameBookFullPrice = new BigDecimal(item.getValue());
+      BigDecimal sameBookFullPrice = BOOK_FULL_PRICE.multiply(new BigDecimal(item.getValue()));
 
-      total = total.add(sameBookFullPrice.multiply(BOOK_FULL_PRICE));
+      total = total.add(sameBookFullPrice);
     }
     return total;
   }
@@ -47,8 +47,8 @@ public class BookStoreCheckout {
     return total.subtract(discount);
   }
 
-  private BigDecimal getDiscountRate(int noOfUniqueItems) {
-    switch (noOfUniqueItems) {
+  private BigDecimal getDiscountRate(int noOfDifferentBooks) {
+    switch (noOfDifferentBooks) {
     case 2:
       return DISCOUNT_RATE_TWO_BOOKS;
     case 3:
